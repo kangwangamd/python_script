@@ -41,12 +41,13 @@ def update_data(file1, file2):
 
 import collections
 def classify(prof):
-    res = {'RCCL': [0, 0], 
-            'GEMM': [0, 0], 
-            'Flash_attention': [0, 0], 
-            'element_wise': [0, 0], 
-            'reduce_kernel': [0, 0], 
-            'layer_norm': [0, 0], 
+    res = {'RCCL': [0, 0],
+            'GEMM': [0, 0],
+            'Flash_attention': [0, 0],
+            'element_wise': [0, 0],
+            'reduce_kernel': [0, 0],
+            'layer_norm': [0, 0],
+            'CatArrayBatchedCopy': [0, 0],
             'barrier': [0, 0],
             'others': [0, 0]
             }
@@ -64,15 +65,18 @@ def classify(prof):
         elif 'elementwise' in key.lower():
             res['element_wise'][0] += call
             res['element_wise'][1] += duration
-        elif 'reduce_kernel' in key.lower():
-            res['reduce_kernel'][0] += call
-            res['reduce_kernel'][1] += duration
+        #elif 'reduce_kernel' in key.lower():
+        #    res['reduce_kernel'][0] += call
+        #    res['reduce_kernel'][1] += duration
         elif 'layer_norm' in key.lower():
             res['layer_norm'][0] += call
             res['layer_norm'][1] += duration
         elif 'barrier' in key.lower():
             res['barrier'][0] += call
             res['barrier'][1] += duration
+        elif 'catarraybatchedcopy' in key.lower():
+            res['CatArrayBatchedCopy'][0] += call
+            res['CatArrayBatchedCopy'][1] += duration
         else:
             res['others'][0] += call
             res['others'][1] += duration
@@ -80,13 +84,13 @@ def classify(prof):
 
 prof1_calls = get_csv_name_calls(profile_path)
 print(prof1_calls)
-order = ['RCCL', 'GEMM', 'Flash_attention', 'element_wise', 'reduce_kernel', 'layer_norm', 'barrier', 'others']
+order = ['RCCL', 'GEMM', 'Flash_attention', 'element_wise', 'layer_norm', 'CatArrayBatchedCopy', 'barrier', 'others'] # 'reduce_kernel',
 
 for key in order:
     val = classify(prof1_calls)[key]
     print(key, val[0], val[1])
 
-    
+
 '''
 prof2_calls = get_csv_name_calls(path + profile_2)
 for key in order:
@@ -142,4 +146,4 @@ total_time = sum(one_batch_no_overlap.values())
 print(total_time)
 for key, val in one_batch_no_overlap.items():
     print(key, val, val/total_time)
-''' 
+'''
