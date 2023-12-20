@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 path = 'debug.log'
 
 file1 = open(path, 'r')
