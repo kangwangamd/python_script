@@ -1,0 +1,5 @@
+# tuned_gemm_csv: /var/lib/jenkins/HRT/gradlib/tuned_hrt.csv
+# tuned_gemm_csv: /var/lib/jenkins/HRT/gradlib/tuned_hrt_f32_0110_2024.csv
+# tuned_gemm_csv: /var/lib/jenkins/HRT/gradlib/tuned_hrt_f32_0111_2024_Large.csv
+# tuned_gemm_csv: /var/lib/jenkins/HRT/gradlib/0111_2024_tuned_hrt_bf16_small.csvi
+tuned_gemm_csv: /var/lib/jenkins/HRT/python_script/gradlib/tuned_hrt.csv
