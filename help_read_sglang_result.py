@@ -33,9 +33,9 @@ for tp in [8, 4]:
     for il in [128, 2048]:
         for ol in [128, 2048]:
             for bs in range(1, 9):
-                if (bs, il, ol, tp) in mapping:
-                    path = mapping[(bs, il, ol, tp)]
-                    print((bs, il, ol, tp))
+                if (2**bs, il, ol, tp) in mapping:
+                    path = mapping[(2**bs, il, ol, tp)]
+                    print((2**bs, il, ol, tp))
 
                     file1 = open(path, 'r')
                     Lines = file1.readlines()
