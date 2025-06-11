@@ -1,0 +1,54 @@
+import re
+import collections
+
+print('inside the postp')
+
+# Keywords to search for
+keywords = [
+    "Output token throughput",
+    "Mean E2E Latency",
+    "Mean TTFT"
+]
+
+# Dictionary to store extracted values
+extracted_data = collections.defaultdict(list)
+# File path (change this to your actual file path)
+for i in range(1, 13):
+    if i < 10:
+        file_path = "0"+ str(i) + ".log"
+    else:
+        file_path = str(i) + ".log"
+    print(file_path)
+
+# Dictionary to store extracted values
+
+    # Read the file
+    with open(file_path, "r") as f:
+        lines = f.readlines()
+
+    # Iterate over each line
+    for line in lines:
+        for keyword in keywords:
+            if keyword in line:
+                # Use regex to extract the number after the keyword
+                tmp = line.split()
+                extracted_data[keyword].append(float(tmp[-1]))
+                '''
+                match = re.search(f"{keyword}\\s*([-+]?[0-9]*\\.?[0-9]+)", line)
+                if match:
+                    extracted_data[keyword] = float(match.group(1))
+                '''
+# Display extracted data
+'''
+for k, v in extracted_data.items():
+    print(f"{k} {v}")
+'''
+#dict_keys(['Output token throughput', 'Mean E2E Latency', 'Mean TTFT'])
+
+key1 = extracted_data['Output token throughput']
+key2 = extracted_data['Mean TTFT']
+key3 = extracted_data['Mean E2E Latency']
+
+N = len(extracted_data['Output token throughput'])
+for i in range(N):
+    print(key1[i], key2[i], key3[i])
